@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="author" content="vadim.panasiuk@gmail.com"/>
+
+    <title>Real Estate Directory</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous"/>
+    <style>
+        body {
+            padding-top: 54px;
+            margin-top: 2%
+        }
+
+        @media (min-width: 992px) {
+            body {
+                padding-top: 56px;
+            }
+        }
+
+    </style>
+</head>
+
+<body class="gray-bg">
+
+<div class="middle-box loginscreen animated fadeInDown">
+    <div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+
+                    <h3>Login</h3>
+                    <form autocomplete="off" action="#" th:action="@{/login}"
+                          method="post" class="m-t"
+                          data-toggle="validator">
+
+                        <div class="form-group input-group has-feedback">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-envelope"></span>
+                            </span>
+                            <input type="text" id="email" name="email" th:placeholder="Email"
+                                   class="form-control"
+                                   data-error="This email address is invalid" required/>
+                            <span class="glyphicon form-control-feedback"
+                                  aria-hidden="true"></span>
+
+                        </div>
+                        <div class="form-group input-group has-feedback">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon glyphicon-asterisk"></span>
+                            </span>
+                            <input type="password" th:placeholder="Password"
+                            id="password" name="password" class="form-control"
+                                   data-error="This password required" required/>
+                            <span class="glyphicon form-control-feedback"
+                                  aria-hidden="true"></span>
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-primary block full-width m-b"
+                                value="Login"
+                                th:text="Login">
+                        </button>
+
+                    </form>
+                    <br>
+                    <form th:action="@{/registration}" method="get">
+                        <button class="btn btn-primary full-width m-b" type="Submit">Go To Registration Page</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+
+    </div>
+</div>
+
+
+</body>
+
+</html>

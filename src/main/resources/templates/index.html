@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="author" content="vadim.panasiuk@gmail.com">
+
+    <title>Real Estate Directory</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Sort table -->
+    <!--<link href="//datatables.net/download/build/nightly/jquery.dataTables.css" rel="stylesheet" type="text/css" />-->
+    <!--<script src="https://datatables.net/download/build/nightly/jquery.dataTables.js"></script>-->
+
+    <style>
+        body {
+            padding-top: 54px;
+            margin-top: 2%
+        }
+
+        @media (min-width: 992px) {
+            body {
+                padding-top: 56px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- Page Content -->
+
+<div class="container">
+    <div class="row">
+            <button type="button" class="btn btn-primary" id="sortByName">Sort by name</button>
+            <button type="button" class="btn btn-primary" id="sortByPrice">Sort by price</button>
+    </div>
+    <br>
+    <div class="row">
+        <button type="button" class="btn btn-primary" id="filterMoreButton">With price less</button>
+        <input type="number" name="filterLessField" >
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-9">
+            <table class="table table-list-search" id="apartmentTable">
+                <thead>
+                <tr>
+                    <th onclick="sortTable(0)"><i>Apartment</i></th>
+                    <th><i>Description</i></th>
+                    <th onclick="sortTable(1)"><i>Price</i></th>
+                    <th><i></i></th>
+                </tr>
+                </thead>
+                <tbody id="tbodyId">
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-primary" name="registration"
+                type="Submit">Logout</button>
+    </form>
+</div>
+
+<script src="/js/getSortList.js"></script>
+
+<script>
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("apartmentTable");
+        switching = true;
+        dir = "asc";
+        while (switching) {
+            switching = false;
+            rows = table.getElementsByTagName("TR");
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch= true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch= true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount ++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>
+</body>
+
+</html>
